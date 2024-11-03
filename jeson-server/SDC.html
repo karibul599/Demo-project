@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDC Counter Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #28a745;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logout-button {
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .logout-button:hover {
+            background-color: #e63939;
+        }
+
+        .content {
+            flex: 1;
+            display: flex;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            margin-right: 20px;
+        }
+
+        .counter-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .counter-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .instructions {
+            flex: 1;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .instructions-box {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: left;
+        }
+
+        .instructions-box h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .instructions-box p {
+            margin-bottom: 10px;
+            color: #555;
+        }
+
+        footer {
+            background-color: #f0f0f0;
+            padding: 15px;
+            text-align: center;
+        }
+
+        footer p {
+            margin: 0;
+            color: #555;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+            transition: background 0.3s;
+        }
+
+        .modal-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Service Delivery Center (SDC)</h1>
+    <button class="logout-button" onclick="openModal()">Log Out</button>
+</header>
+
+<div class="content">
+    <div class="button-container">
+        <button class="counter-button" onclick="redirectToService()">Counter 1</button>
+        <button class="counter-button" onclick="redirectToService()">Counter 2</button>
+        <button class="counter-button" onclick="redirectToService()">Counter 3</button>
+        <button class="counter-button" onclick="redirectToService()">Counter 4</button>
+        <button class="counter-button" onclick="redirectToService()">Counter 5</button>
+        <button class="counter-button" onclick="redirectToService()">Counter 6</button>
+        <button class="counter-button" onclick="redirectToService()">Counter 7</button>
+        <button class="counter-button" onclick="redirectToService()">Counter 8</button>
+        <button class="counter-button" onclick="redirectToService()">Counter 9</button>
+        <button class="counter-button" onclick="redirectToService()">Counter 10</button>
+    </div>
+    <div class="instructions">
+        <div class="instructions-box">
+            <h2>Help & Instructions</h2>
+            <p>Welcome to the Service Delivery Center! Please follow these steps:</p>
+            <ol>
+                <li>Select one of the counter buttons on the left to initiate a service request.</li>
+                <li>Each button corresponds to a different service. Choose the one that fits your needs.</li>
+                <li>After selecting a counter, follow any on-screen instructions to complete your request.</li>
+                <li>If you need to log out, click the "Log Out" button in the header.</li>
+                <li>For further assistance, please contact customer support.</li>
+            </ol>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2024 Service Delivery Center. All Rights Reserved.</p>
+</footer>
+
+<!-- Modal -->
+<div id="logoutModal" class="modal">
+    <div class="modal-content">
+        <h3>Are you sure you want to log out?</h3>
+        <button class="modal-button" id="confirmLogout">Yes</button>
+        <button class="modal-button" id="cancelLogout">No</button>
+    </div>
+</div>
+
+<script>
+    function openModal() {
+        document.getElementById('logoutModal').style.display = 'flex';
+    }
+
+    document.getElementById('confirmLogout').onclick = function() {
+        // Redirect to login page or perform logout logic
+        window.location.href = 'TokenLogin.html'; // Adjust the URL as necessary
+    };
+
+    document.getElementById('cancelLogout').onclick = function() {
+        document.getElementById('logoutModal').style.display = 'none';
+    };
+
+    // Close the modal if user clicks outside of it
+    window.onclick = function(event) {
+        const modal = document.getElementById('logoutModal');
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    };
+
+    function redirectToService() {
+        window.location.href = 'service.html'; // Redirect to the service page
+    }
+</script>
+
+</body>
+</html>

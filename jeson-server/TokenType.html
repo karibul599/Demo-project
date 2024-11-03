@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Type</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #28a745;
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .message {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .background {
+            background-image: url('images/token2.jpg');
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-position: center;
+            padding: 20px;
+        }
+
+        .token-button {
+            background-color: #28a745;
+            color: white;
+            width: 200px;
+            padding: 15px;
+            margin: 10px;
+            border: none;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .token-button:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+
+        #output {
+            font-size: 24px;
+            margin-top: 20px;
+            color: #333;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid #28a745;
+            border-radius: 15px;
+            padding: 20px;
+            width: 250px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .reset-message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: red; /* Red color for the message */
+            text-align: center;
+            display: none; /* Hidden by default */
+        }
+
+        footer {
+            background-color: #f0f0f0;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .footer-button {
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s;
+        }
+
+        .footer-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .hidden {
+            display: none; /* Class to hide elements */
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Token Generator</h1>
+    <div class="message">Click a button to generate a token!</div>
+</header>
+
+<div class="background">
+    <div id="tokenButtons" class="token-buttons">
+        <button id="token-type" class="token-button">Service Token</button>
+        <button id="token-type1" class="token-button">New Token</button>
+        <button id="token-type2" class="token-button">Break Token</button>
+        <button id="token-type3" class="token-button">BIG Token</button>
+    </div>
+    
+    <div id="output">Generated Token will appear here</div>
+    <div id="resetMessage" class="reset-message">You can generate a new token after resetting!</div>
+</div>
+
+<footer>
+    <a class="footer-button" id="backButton" href="Token.html">Back</a>
+    <button class="footer-button" id="resetButton">Reset</button>
+</footer>
+
+<script>
+    let tokenGenerated = false;
+
+    // Function to generate a random token
+    function generateToken() {
+        const randomNum = Math.floor(Math.random() * 1000); // Random number between 0 and 999
+        const formattedToken = `T${String(randomNum).padStart(3, '0')}`; // Format as T001, T002, etc.
+        return formattedToken;
+    }
+
+    // Event listener for all buttons
+    document.querySelectorAll('.token-button').forEach(button => {
+        button.addEventListener('click', function() {
+            if (!tokenGenerated) {
+                const token = generateToken(); // Generate the token
+                localStorage.setItem('token',JSON.stringify(token));
+                document.getElementById("output").innerText = `Generated Token: ${token}`; // Display the token
+                tokenGenerated = true; // Set flag to indicate token has been generated
+                document.getElementById("resetMessage").style.display = "block"; // Show the reset message
+                disableButtons(); // Disable token buttons
+            }
+        });
+    });
+
+    // Disable token generation buttons
+    function disableButtons() {
+        document.getElementById("tokenButtons").classList.add("hidden"); // Hide token buttons
+    }
+
+    // Reset button functionality
+    document.getElementById("resetButton").addEventListener("click", function() {
+        tokenGenerated = false; // Reset flag
+        document.getElementById("output").innerText = "Generated Token will appear here"; // Clear output
+        document.getElementById("resetMessage").style.display = "none"; // Hide reset message
+        enableButtons(); // Enable token buttons
+    });
+
+    // Enable token generation buttons
+    function enableButtons() {
+        document.getElementById("tokenButtons").classList.remove("hidden"); // Show token buttons
+    }
+</script>
+
+</body>
+</html>

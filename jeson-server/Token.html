@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Token Page</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        header {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logout-button {
+            color: white;
+            background: linear-gradient(135deg, #5f722a, #4d5c2c);
+            text-align: center;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 50px; /* Rounded button */
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .logout-button:hover {
+            background: linear-gradient(135deg, #4d5c2c, #3d4a2a);
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+
+        .background {
+            background-image: url('images/token2.jpg');
+            height: 100%;
+            background-size: cover; 
+            background-position: center; 
+            display: flex;
+            justify-content: center; 
+            align-items: center; 
+            flex: 1; /* Allow it to grow to fill remaining space */
+        }
+
+        .token-button {
+            width: 220px;
+            color: white;
+            background: linear-gradient(135deg, #28a745, #218838);
+            text-align: center;
+            padding: 15px 30px; 
+            font-size: 24px; 
+            border: none; 
+            border-radius: 50px; /* Rounded button */
+            text-decoration: none;
+            transition: background 0.3s, transform 0.2s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .token-button:hover {
+            background: linear-gradient(135deg, #218838, #1c7430);
+            transform: translateY(-2px); /* Slight lift effect */
+        }
+
+        footer {
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+        }
+
+        .modal-button {
+            margin: 10px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .yes-button {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .yes-button:hover {
+            background-color: #218838;
+        }
+
+        .no-button {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .no-button:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Token Management</h1>
+        <a class="logout-button" href="#" id="logoutBtn">Log Out</a>
+    </header>
+
+    <div class="background">
+        <a class="token-button" href="TokenType.html">Token</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Token Management System. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="logoutModal" class="modal">
+        <div class="modal-content">
+            <h3>Are you sure you want to log out?</h3>
+            <button class="modal-button yes-button" id="yesBtn">Yes</button>
+            <button class="modal-button no-button" id="noBtn">No</button>
+        </div>
+    </div>
+
+    <script>
+        const logoutBtn = document.getElementById("logoutBtn");
+        const logoutModal = document.getElementById("logoutModal");
+        const yesBtn = document.getElementById("yesBtn");
+        const noBtn = document.getElementById("noBtn");
+
+        logoutBtn.onclick = function(event) {
+            event.preventDefault(); // Prevent default link action
+            logoutModal.style.display = "flex"; // Show the modal
+        };
+
+        noBtn.onclick = function() {
+            logoutModal.style.display = "none"; // Close the modal
+        };
+
+        yesBtn.onclick = function() {
+            // Redirect to the logout page or perform logout action
+            window.location.href = "TokenLogin.html";
+        };
+
+        // Close modal if user clicks anywhere outside of it
+        window.onclick = function(event) {
+            if (event.target === logoutModal) {
+                logoutModal.style.display = "none";
+            }
+        };
+    </script>
+</body>
+</html>
